@@ -10,6 +10,8 @@ public class SoundInput : MonoBehaviour
     public UnityEvent OnSpeaked;
 
     public InputField queryText;
+    public Button StartButton;
+    public Button EndButton;
     DictationRecognizer dictationRecognizer;
 
     void Start()
@@ -38,9 +40,13 @@ public class SoundInput : MonoBehaviour
         //ディクテーションを開始
         dictationRecognizer.Start();
         Debug.Log("音声認識開始");
-
+        var colors = StartButton.GetComponent<Button>().colors;
+        colors.normalColor = new Color(180, 180, 180);
+        StartButton.GetComponent<Button>().colors = colors;
+        colors = EndButton.GetComponent<Button>().colors;
+        colors.normalColor = new Color(255, 255, 255);
+        EndButton.GetComponent<Button>().colors = colors;
     }
-
     //DictationResult：音声が特定の認識精度で認識されたときに発生するイベント
     private void DictationRecognizer_DictationResult(string text, ConfidenceLevel confidence)
     {
@@ -77,6 +83,13 @@ public class SoundInput : MonoBehaviour
     public void StopDictation()
     {
         dictationRecognizer.Stop();
+        var colors = StartButton.GetComponent<Button>().colors;
+        colors.normalColor = new Color(255, 255, 255);
+        StartButton.GetComponent<Button>().colors = colors;
+        colors = EndButton.GetComponent<Button>().colors;
+        colors.normalColor = new Color(180, 180, 180);
+        EndButton.GetComponent<Button>().colors = colors;
+
     }
     public void Fin()
     {

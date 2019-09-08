@@ -16,9 +16,8 @@ public class RequestTalkAPI : MonoBehaviour
     public string query = "";
     public Text queryText;
     public Text replyText;
-
+    public Sasara sasara;
     public InputField inputField;
-
     private Process _process;
     //  IEnumerator Start()
 
@@ -43,8 +42,8 @@ public class RequestTalkAPI : MonoBehaviour
         // ChatAPIに送る情報を入力
         WWWForm form = new WWWForm();
         query = queryText.text;
-        UnityEngine.Debug.Log("send text:" +queryText.text);
-   //     query = "おなかがすきました";
+        UnityEngine.Debug.Log("send text:" + queryText.text);
+        //     query = "おなかがすきました";
         form.AddField("apikey", apikey);
         form.AddField("query", query, Encoding.UTF8);
 
@@ -60,6 +59,7 @@ public class RequestTalkAPI : MonoBehaviour
             }
             else
             {
+                sasara.ChangeSasara();
                 try
                 {
                     // 取得したものをJsonで整形
@@ -71,26 +71,27 @@ public class RequestTalkAPI : MonoBehaviour
                     {
                         replyText.text = jsnode["results"][0]["reply"].Get<string>();
 
-                        TalkCeVIO(jsnode["results"][0]["reply"].Get<string>());
+                        StartCoroutine("TalkCeVIO", replyText.text);
                     }
                     else
                     {
-                        TalkCeVIO("ごめんなさい、よく聞こえませんでした");
+                        StartCoroutine("TalkCeVIO", "ごめんなさい、よく聞こえませんでした");
                     }
 
-                    UnityEngine.Debug.Log("reply text: " +replyText.text);
+                    UnityEngine.Debug.Log("reply text: " + replyText.text);
 
                 }
                 catch (Exception e)
                 {
                     // エラーが出たらこれがログに吐き出される
                     UnityEngine.Debug.Log("JsonNode:" + e.Message);
-                    TalkCeVIO("ごめんなさい、よく聞こえませんでした");
+                    StartCoroutine("TalkCeVIO", "ごめんなさい、よく聞こえませんでした");
                 }
-             
             }
+
         }
     }
+
 
     int ChangeCast(string name)
     {
@@ -98,8 +99,11 @@ public class RequestTalkAPI : MonoBehaviour
 
         return 0;
     }
-    void TalkCeVIO(string text)
+    private IEnumerator TalkCeVIO(string text)
     {
+        // UnityEngine.Debug.Log(text);
+        yield return new WaitForSeconds(0.125f);
+       // UnityEngine.Debug.Log(text);
         if (null == _process)
         {
             //changeCast 名前　で変更
