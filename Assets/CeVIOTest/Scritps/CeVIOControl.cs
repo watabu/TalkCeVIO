@@ -20,8 +20,8 @@ public class CeVIOControl : MonoBehaviour {
             {
                 //changeCast 名前　で変更
                 _process = new Process();
-                _process.StartInfo.FileName = Application.dataPath + "/External/CeVIO1.exe";
-                _process.StartInfo.Arguments = "changecast";
+                _process.StartInfo.FileName = Application.dataPath + "/External/CeVIOVoice.exe";
+                //_process.StartInfo.Arguments = "changecast";
                 _process.StartInfo.Arguments = "こんにちわ さとうささらです。 はじめまして！";
                 // for Redirect
                 {

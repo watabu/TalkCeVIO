@@ -1,0 +1,8 @@
+C:\Users\wakot\Documents\GitHub\TalkCeVIO\Project1\bin\Debug\CeVIOVoice.exe.config
+C:\Users\wakot\Documents\GitHub\TalkCeVIO\Project1\bin\Debug\CeVIOVoice.exe
+C:\Users\wakot\Documents\GitHub\TalkCeVIO\Project1\bin\Debug\CeVIOVoice.pdb
+C:\Users\wakot\Documents\GitHub\TalkCeVIO\Project1\bin\Debug\CeVIO.Talk.RemoteService.DLL
+C:\Users\wakot\Documents\GitHub\TalkCeVIO\Project1\obj\Debug\CeVIOVoice.csproj.CoreCompileInputs.cache
+C:\Users\wakot\Documents\GitHub\TalkCeVIO\Project1\obj\Debug\CeVIOVoice.csproj.CopyComplete
+C:\Users\wakot\Documents\GitHub\TalkCeVIO\Project1\obj\Debug\CeVIOVoice.exe
+C:\Users\wakot\Documents\GitHub\TalkCeVIO\Project1\obj\Debug\CeVIOVoice.pdb

@@ -75,7 +75,8 @@ public class RequestTalkAPI : MonoBehaviour
                     }
                     else
                     {
-                        StartCoroutine("TalkCeVIO", "ごめんなさい、よく聞こえませんでした");
+                        replyText.text = "なんだって！？";
+                        StartCoroutine("TalkCeVIO", "なんだって！？");
                     }
 
                     UnityEngine.Debug.Log("reply text: " + replyText.text);
@@ -103,31 +104,32 @@ public class RequestTalkAPI : MonoBehaviour
     {
         // UnityEngine.Debug.Log(text);
         yield return new WaitForSeconds(0.125f);
-       // UnityEngine.Debug.Log(text);
+        // UnityEngine.Debug.Log(text);
         if (null == _process)
         {
             //changeCast 名前　で変更
             _process = new Process();
-            _process.StartInfo.FileName = Application.dataPath + "/External/CeVIO1.exe";
+            _process.StartInfo.FileName = Application.dataPath + "/External/CeVIOVoice.exe";
             //_process.StartInfo.Arguments = "changecast";
-            _process.StartInfo.Arguments = text;
-            // for Redirect
-            {
-                _process.StartInfo.CreateNoWindow = true;
-                _process.StartInfo.UseShellExecute = false;
-                _process.StartInfo.RedirectStandardOutput = true;
-            }
-            // for ExitEvent
-            { 
-                _process.EnableRaisingEvents = true;
-                _process.Exited += Process_Exited;
-            }
-            _process.Start();
-            // Redirect
-            string output = _process.StandardOutput.ReadToEnd();
-            UnityEngine.Debug.Log(output);
         }
+        _process.StartInfo.Arguments = text;
+        // for Redirect
+        {
+            _process.StartInfo.CreateNoWindow = true;
+            _process.StartInfo.UseShellExecute = false;
+            _process.StartInfo.RedirectStandardOutput = true;
+        }
+        // for ExitEvent
+        {
+            _process.EnableRaisingEvents = true;
+            _process.Exited += Process_Exited;
+        }
+        _process.Start();
+        // Redirect
+        string output = _process.StandardOutput.ReadToEnd();
+        UnityEngine.Debug.Log(output);
     }
+    
     void Process_Exited(object sender, System.EventArgs e)
     {
         UnityEngine.Debug.Log("Process_Exited");
